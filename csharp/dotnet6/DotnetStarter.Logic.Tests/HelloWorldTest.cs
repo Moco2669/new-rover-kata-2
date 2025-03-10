@@ -62,6 +62,15 @@ namespace DotnetStarter.Logic.Tests
             rover.TurnRight();
             Assert.Equal("1:0:E", rover.Move());
         }
+
+        [Fact]
+        public void RoverMovesSouth()
+        {
+            Rover rover = new();
+            rover.TurnRight();
+            rover.TurnRight();
+            Assert.Equal("0:-1:S", rover.Move());
+        }
     }
 
     public class Rover
@@ -73,6 +82,7 @@ namespace DotnetStarter.Logic.Tests
         {
             { "N", (0, 1) },
             { "E", (1, 0) },
+            { "S", (0, -1)}
         };
         private int _facing = 0;
         
@@ -82,11 +92,6 @@ namespace DotnetStarter.Logic.Tests
             _xCoordinate = _xCoordinate + xIncrement;
             _yCoordinate = _yCoordinate + yIncrement;
             return WriteReport();
-        }
-
-        private string WriteReport()
-        {
-            return _xCoordinate + ":" + _yCoordinate + ":" + _directions[_facing];
         }
 
         public string TurnLeft()
@@ -103,6 +108,11 @@ namespace DotnetStarter.Logic.Tests
             return WriteReport();
         }
 
+        private string WriteReport()
+        {
+            return _xCoordinate + ":" + _yCoordinate + ":" + _directions[_facing];
+        }
+        
         private void WrapAroundDirections()
         {
             _facing = (_facing + 4) % 4;
