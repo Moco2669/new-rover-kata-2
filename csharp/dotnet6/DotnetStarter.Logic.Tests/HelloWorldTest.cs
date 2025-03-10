@@ -54,18 +54,34 @@ namespace DotnetStarter.Logic.Tests
             rover.TurnRight();
             Assert.Equal("0:0:N", rover.TurnRight());
         }
+
+        [Fact]
+        public void RoverMovesEast()
+        {
+            Rover rover = new();
+            rover.TurnRight();
+            Assert.Equal("1:0:E", rover.Move());
+        }
     }
 
     public class Rover
     {
+        private int _xCoordinate = 0;
         private int _yCoordinate = 0;
         private List<string> _directions = new(){"N", "E", "S", "W"};
+        private Dictionary<string, (int, int)> _directionsAsCoordinates = new()
+        {
+            { "N", (0, 1) },
+            { "E", (1, 0) },
+        };
         private int _facing = 0;
         
         public string Move()
         {
-            ++_yCoordinate;
-            return "0:" + _yCoordinate + ":" + _directions[_facing];
+            (int xIncrement, int yIncrement) = _directionsAsCoordinates[_directions[_facing]];
+            _xCoordinate = _xCoordinate + xIncrement;
+            _yCoordinate = _yCoordinate + yIncrement;
+            return _xCoordinate + ":" + _yCoordinate + ":" + _directions[_facing];
         }
 
         public string TurnLeft()
