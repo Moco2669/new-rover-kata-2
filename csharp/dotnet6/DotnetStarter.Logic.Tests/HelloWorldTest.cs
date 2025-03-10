@@ -22,6 +22,13 @@ namespace DotnetStarter.Logic.Tests
             rover.Move();
             Assert.Equal("0:2:N", rover.Move());
         }
+
+        [Fact]
+        public void RoverTurnsLeft()
+        {
+            Rover rover = new();
+            Assert.Equal("0:0:W", rover.TurnLeft());
+        }
     }
 
     public class Rover
@@ -31,6 +38,11 @@ namespace DotnetStarter.Logic.Tests
         {
             ++yCoordinate;
             return "0:"+yCoordinate+":N";
+        }
+
+        public string TurnLeft()
+        {
+            return "0:0:W";
         }
     }
 }
