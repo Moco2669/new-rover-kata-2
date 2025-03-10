@@ -94,6 +94,8 @@ namespace DotnetStarter.Logic.Tests
             {"W", (-1, 0)}
         };
         private int _facing = 0;
+        private const int left = -1;
+        private const int right = 1;
         
         public string Move()
         {
@@ -105,16 +107,20 @@ namespace DotnetStarter.Logic.Tests
 
         public string TurnLeft()
         {
-            --_facing;
-            WrapAroundDirections();
+            Turn(left);
             return WriteReport();
         }
 
         public string TurnRight()
         {
-            ++_facing;
-            WrapAroundDirections();
+            Turn(right);
             return WriteReport();
+        }
+
+        private void Turn(int direction)
+        {
+            _facing = _facing + direction;
+            WrapAroundDirections();
         }
 
         private string WriteReport()
