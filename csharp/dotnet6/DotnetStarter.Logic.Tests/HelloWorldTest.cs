@@ -37,6 +37,13 @@ namespace DotnetStarter.Logic.Tests
             rover.TurnLeft();
             Assert.Equal("0:0:S", rover.TurnLeft());
         }
+
+        [Fact]
+        public void RoverTurnsRightOnce()
+        {
+            Rover rover = new();
+            Assert.Equal("0:0:E", rover.TurnRight());
+        }
     }
 
     public class Rover
@@ -54,6 +61,13 @@ namespace DotnetStarter.Logic.Tests
         public string TurnLeft()
         {
             --_facing;
+            WrapAroundDirections();
+            return "0:0:" + _directions[_facing];
+        }
+
+        public string TurnRight()
+        {
+            ++_facing;
             WrapAroundDirections();
             return "0:0:" + _directions[_facing];
         }
