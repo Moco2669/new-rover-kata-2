@@ -14,13 +14,23 @@ namespace DotnetStarter.Logic.Tests
             Rover rover = new();
             Assert.Equal("0:1:N", rover.Move());
         }
+
+        [Fact]
+        public void RoverMovesTwoPoints()
+        {
+            Rover rover = new();
+            rover.Move();
+            Assert.Equal("0:2:N", rover.Move());
+        }
     }
 
     public class Rover
     {
+        private int yCoordinate = 0;
         public string Move()
         {
-            return "0:1:N";
+            ++yCoordinate;
+            return "0:"+yCoordinate+":N";
         }
     }
 }
