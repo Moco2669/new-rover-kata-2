@@ -81,6 +81,11 @@ namespace DotnetStarter.Logic.Tests
             (int xIncrement, int yIncrement) = _directionsAsCoordinates[_directions[_facing]];
             _xCoordinate = _xCoordinate + xIncrement;
             _yCoordinate = _yCoordinate + yIncrement;
+            return WriteReport();
+        }
+
+        private string WriteReport()
+        {
             return _xCoordinate + ":" + _yCoordinate + ":" + _directions[_facing];
         }
 
@@ -88,14 +93,14 @@ namespace DotnetStarter.Logic.Tests
         {
             --_facing;
             WrapAroundDirections();
-            return "0:0:" + _directions[_facing];
+            return WriteReport();
         }
 
         public string TurnRight()
         {
             ++_facing;
             WrapAroundDirections();
-            return "0:0:" + _directions[_facing];
+            return WriteReport();
         }
 
         private void WrapAroundDirections()
