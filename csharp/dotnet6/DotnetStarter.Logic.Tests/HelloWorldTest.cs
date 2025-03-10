@@ -44,6 +44,16 @@ namespace DotnetStarter.Logic.Tests
             Rover rover = new();
             Assert.Equal("0:0:E", rover.TurnRight());
         }
+
+        [Fact]
+        public void RoverTurnsAroundRightSide()
+        {
+            Rover rover = new();
+            rover.TurnRight();
+            rover.TurnRight();
+            rover.TurnRight();
+            Assert.Equal("0:0:N", rover.TurnRight());
+        }
     }
 
     public class Rover
