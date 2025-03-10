@@ -48,7 +48,7 @@ namespace DotnetStarter.Logic.Tests
         public string Move()
         {
             ++_yCoordinate;
-            return "0:" + _yCoordinate + ":N";
+            return "0:" + _yCoordinate + ":" + _directions[_facing];
         }
 
         public string TurnLeft()
