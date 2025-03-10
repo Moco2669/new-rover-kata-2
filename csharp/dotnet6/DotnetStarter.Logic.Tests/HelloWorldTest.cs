@@ -42,7 +42,7 @@ namespace DotnetStarter.Logic.Tests
     public class Rover
     {
         private int _yCoordinate = 0;
-        private List<string> _directions = new List<string>(){"N", "E", "S", "W"};
+        private List<string> _directions = new(){"N", "E", "S", "W"};
         private int _facing = 0;
         
         public string Move()
