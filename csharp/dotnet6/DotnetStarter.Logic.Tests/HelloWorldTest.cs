@@ -71,6 +71,14 @@ namespace DotnetStarter.Logic.Tests
             rover.TurnRight();
             Assert.Equal("0:-1:S", rover.Move());
         }
+
+        [Fact]
+        public void RoverMovesWest()
+        {
+            Rover rover = new();
+            rover.TurnLeft();
+            Assert.Equal("-1:0:W", rover.Move());
+        }
     }
 
     public class Rover
@@ -82,7 +90,8 @@ namespace DotnetStarter.Logic.Tests
         {
             { "N", (0, 1) },
             { "E", (1, 0) },
-            { "S", (0, -1)}
+            { "S", (0, -1)},
+            {"W", (-1, 0)}
         };
         private int _facing = 0;
         
