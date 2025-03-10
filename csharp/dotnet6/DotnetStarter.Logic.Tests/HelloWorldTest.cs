@@ -24,25 +24,43 @@ namespace DotnetStarter.Logic.Tests
         }
 
         [Fact]
-        public void RoverTurnsLeft()
+        public void RoverTurnsLeftOnce()
         {
             Rover rover = new();
             Assert.Equal("0:0:W", rover.TurnLeft());
+        }
+
+        [Fact]
+        public void RoverTurnsLeftTwice()
+        {
+            Rover rover = new();
+            rover.TurnLeft();
+            Assert.Equal("0:0:S", rover.TurnLeft());
         }
     }
 
     public class Rover
     {
-        private int yCoordinate = 0;
+        private int _yCoordinate = 0;
+        private List<string> _directions = new List<string>(){"N", "E", "S", "W"};
+        private int _facing = 0;
+        
         public string Move()
         {
-            ++yCoordinate;
-            return "0:"+yCoordinate+":N";
+            ++_yCoordinate;
+            return "0:" + _yCoordinate + ":N";
         }
 
         public string TurnLeft()
         {
-            return "0:0:W";
+            --_facing;
+            WrapAroundDirections();
+            return "0:0:" + _directions[_facing];
+        }
+
+        private void WrapAroundDirections()
+        {
+            _facing = (_facing + 4) % 4;
         }
     }
 }
