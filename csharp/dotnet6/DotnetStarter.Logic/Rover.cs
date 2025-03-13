@@ -64,6 +64,8 @@ public class Rover
                 return Move();
             case "L":
                 return TurnLeft();
+            case "R":
+                return TurnRight();
             default:
                 return Move();
         }

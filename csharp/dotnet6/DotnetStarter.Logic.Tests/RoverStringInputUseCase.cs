@@ -17,4 +17,11 @@ public class RoverStringInputUseCase
         Rover rover = new();
         Assert.Equal("0:0:W", rover.ExecuteInput("L"));
     }
+
+    [Fact]
+    public void RoverExecutesTurnRightCommand()
+    {
+        Rover rover = new();
+        Assert.Equal("0:0:E", rover.ExecuteInput("R"));
+    }
 }
