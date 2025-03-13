@@ -31,6 +31,7 @@ public class Rover
         if (_xCoordinate > _gridXSize) _xCoordinate = 0;
         if (_yCoordinate > _gridYSize) _yCoordinate = 0;
         if (_yCoordinate < 0) _yCoordinate = _gridYSize;
+        if (_xCoordinate < 0) _xCoordinate = _gridXSize;
         return WriteReport();
     }
 

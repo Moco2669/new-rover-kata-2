@@ -78,8 +78,12 @@ namespace DotnetStarter.Logic.Tests
         public void RoverMovesWest()
         {
             Rover rover = new();
+            rover.TurnRight();
+            rover.Move();
+            rover.Move();
             rover.TurnLeft();
-            Assert.Equal("-1:0:W", rover.Move());
+            rover.TurnLeft();
+            Assert.Equal("1:0:W", rover.Move());
         }
     }
 }

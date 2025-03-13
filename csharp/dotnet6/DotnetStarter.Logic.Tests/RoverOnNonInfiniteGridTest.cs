@@ -40,4 +40,13 @@ public class RoverOnNonInfiniteGridTest
         string turnSouthAndMove = "RRM";
         Assert.Equal("0:" + _gridYSize + ":S", rover.ExecuteInput(turnSouthAndMove));
     }
+
+    [Fact]
+    public void RoverWrapsAroundGoingWest()
+    {
+        Rover rover = new();
+        rover.PutOnGrid(_gridXSize, _gridYSize);
+        string turnWestAndMove = "LM";
+        Assert.Equal(_gridXSize + ":0:W", rover.ExecuteInput(turnWestAndMove));
+    }
 }
