@@ -55,4 +55,9 @@ public class Rover
     {
         _facing = (_facing + 4) % 4;
     }
+
+    public string ExecuteInput(string commands)
+    {
+        return Move();
+    }
 }
