@@ -8,6 +8,9 @@ public class Rover
     private int _yCoordinate = 0;
     private List<string> _directions = new() { "N", "E", "S", "W" };
 
+    private int _gridXSize;
+    private int _gridYSize;
+
     private Dictionary<string, (int, int)> _directionsAsCoordinates = new()
     {
         { "N", (0, 1) },
@@ -76,5 +79,16 @@ public class Rover
         }
 
         return lastCommand;
+    }
+
+    public void PutOnGrid(int xSize, int ySize)
+    {
+        _gridXSize = xSize;
+        _gridYSize = ySize;
+    }
+
+    public (int xSize, int ySize) GetGridSize()
+    {
+        return (_gridXSize, _gridYSize);
     }
 }
