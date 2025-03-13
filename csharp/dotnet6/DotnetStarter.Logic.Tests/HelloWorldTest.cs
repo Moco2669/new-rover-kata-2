@@ -67,9 +67,10 @@ namespace DotnetStarter.Logic.Tests
         public void RoverMovesSouth()
         {
             Rover rover = new();
+            rover.Move();
             rover.TurnRight();
             rover.TurnRight();
-            Assert.Equal("0:-1:S", rover.Move());
+            Assert.Equal("0:0:S", rover.Move());
         }
 
         [Fact]

@@ -30,6 +30,7 @@ public class Rover
         _yCoordinate = _yCoordinate + yIncrement;
         if (_xCoordinate > _gridXSize) _xCoordinate = 0;
         if (_yCoordinate > _gridYSize) _yCoordinate = 0;
+        if (_yCoordinate < 0) _yCoordinate = _gridYSize;
         return WriteReport();
     }
 

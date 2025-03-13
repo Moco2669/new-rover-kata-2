@@ -31,4 +31,13 @@ public class RoverOnNonInfiniteGridTest
         string move8TimesNorth = "MMMMMMMM";
         Assert.Equal("0:0:N", rover.ExecuteInput(move8TimesNorth));
     }
+
+    [Fact]
+    public void RoverWrapsAroundGoingSouth()
+    {
+        Rover rover = new();
+        rover.PutOnGrid(_gridXSize, _gridYSize);
+        string turnSouthAndMove = "RRM";
+        Assert.Equal("0:" + _gridYSize + ":S", rover.ExecuteInput(turnSouthAndMove));
+    }
 }
