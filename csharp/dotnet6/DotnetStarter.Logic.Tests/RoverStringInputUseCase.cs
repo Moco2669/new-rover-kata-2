@@ -24,4 +24,11 @@ public class RoverStringInputUseCase
         Rover rover = new();
         Assert.Equal("0:0:E", rover.ExecuteInput("R"));
     }
+
+    [Fact]
+    public void RoverExecutesMultipleCommands()
+    {
+        Rover rover = new();
+        Assert.Equal("2:1:W", rover.ExecuteInput("RMMLML"));
+    }
 }

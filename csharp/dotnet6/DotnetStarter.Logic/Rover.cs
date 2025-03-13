@@ -58,16 +58,23 @@ public class Rover
 
     public string ExecuteInput(string commands)
     {
-        switch (commands)
+        string lastCommand = "";
+        foreach (char command in commands)
         {
-            case "M":
-                return Move();
-            case "L":
-                return TurnLeft();
-            case "R":
-                return TurnRight();
-            default:
-                return Move();
+            switch (command)
+            {
+                case 'M':
+                    lastCommand = Move();
+                    break;
+                case 'L':
+                    lastCommand = TurnLeft();
+                    break;
+                case 'R':
+                    lastCommand = TurnRight();
+                    break;
+            }
         }
+
+        return lastCommand;
     }
 }
