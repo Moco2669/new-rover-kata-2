@@ -8,8 +8,8 @@ public class Rover
     private int _yCoordinate = 0;
     private List<string> _directions = new() { "N", "E", "S", "W" };
 
-    private int _gridXSize;
-    private int _gridYSize;
+    private int _gridXSize = int.MaxValue;
+    private int _gridYSize = int.MaxValue;
 
     private Dictionary<string, (int, int)> _directionsAsCoordinates = new()
     {
@@ -28,6 +28,8 @@ public class Rover
         (var xIncrement, var yIncrement) = _directionsAsCoordinates[_directions[_facing]];
         _xCoordinate = _xCoordinate + xIncrement;
         _yCoordinate = _yCoordinate + yIncrement;
+        if (_xCoordinate > _gridXSize) _xCoordinate = 0;
+        if (_yCoordinate > _gridYSize) _yCoordinate = 0;
         return WriteReport();
     }
 
