@@ -58,6 +58,14 @@ public class Rover
 
     public string ExecuteInput(string commands)
     {
-        return Move();
+        switch (commands)
+        {
+            case "M":
+                return Move();
+            case "L":
+                return TurnLeft();
+            default:
+                return Move();
+        }
     }
 }
