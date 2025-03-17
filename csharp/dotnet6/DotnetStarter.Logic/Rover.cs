@@ -19,6 +19,8 @@ public class Rover
         { "W", (-1, 0) }
     };
 
+    private Dictionary<int, List<int>> _obstacles = new();
+
     private int _facing = 0;
     private const int left = -1;
     private const int right = 1;
@@ -68,6 +70,10 @@ public class Rover
         string lastCommand = "";
         foreach (char command in commands)
         {
+            if (FacingObstacle())
+            {
+                return "O:" + WriteReport();
+            }
             switch (command)
             {
                 case 'M':
@@ -80,9 +86,29 @@ public class Rover
                     lastCommand = TurnRight();
                     break;
             }
+            if (FacingObstacle())
+            {
+                return "O:" + WriteReport();
+            }
         }
 
         return lastCommand;
+    }
+
+    private bool FacingObstacle()
+    {
+        (var xIncrement, var yIncrement) = _directionsAsCoordinates[_directions[_facing]];
+        int xCoordinateTemp = _xCoordinate + xIncrement;
+        int yCoordinateTemp = _yCoordinate + yIncrement;
+        if (xCoordinateTemp > _gridXSize) xCoordinateTemp = 0;
+        if (yCoordinateTemp > _gridYSize) yCoordinateTemp = 0;
+        if (yCoordinateTemp< 0) yCoordinateTemp = _gridYSize;
+        if (xCoordinateTemp < 0) xCoordinateTemp = _gridXSize;
+        if (_obstacles.ContainsKey(xCoordinateTemp))
+        {
+            return _obstacles[xCoordinateTemp].Contains(yCoordinateTemp);
+        }
+        return false;
     }
 
     public void PutOnGrid(int xSize, int ySize)
@@ -94,5 +120,18 @@ public class Rover
     public (int xSize, int ySize) GetGridSize()
     {
         return (_gridXSize, _gridYSize);
+    }
+
+    public void AddObstacle(int obstacleXPos, int obstacleYPos)
+    {
+        if (!_obstacles.ContainsKey(obstacleYPos))
+        {
+            _obstacles[obstacleXPos] = new List<int>();
+        }
+
+        if (!_obstacles[obstacleXPos].Contains(obstacleYPos))
+        {
+            _obstacles[obstacleXPos].Add(obstacleYPos);
+        }
     }
 }
