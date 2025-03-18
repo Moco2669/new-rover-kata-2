@@ -27,14 +27,21 @@ public class Rover
 
     public string Move()
     {
-        (var xIncrement, var yIncrement) = _directionsAsCoordinates[_directions[_facing]];
-        _xCoordinate = _xCoordinate + xIncrement;
-        _yCoordinate = _yCoordinate + yIncrement;
-        if (_xCoordinate > _gridXSize) _xCoordinate = 0;
-        if (_yCoordinate > _gridYSize) _yCoordinate = 0;
-        if (_yCoordinate < 0) _yCoordinate = _gridYSize;
-        if (_xCoordinate < 0) _xCoordinate = _gridXSize;
+        (int nextX, int nextY) = CalculateNextPoint();
+        (_xCoordinate, _yCoordinate) = (nextX, nextY);
         return WriteReport();
+    }
+
+    private (int nextX, int nextY) CalculateNextPoint()
+    {
+        (var xIncrement, var yIncrement) = _directionsAsCoordinates[_directions[_facing]];
+        int nextX = _xCoordinate + xIncrement;
+        int nextY = _yCoordinate + yIncrement;
+        if (nextX > _gridXSize) nextX = 0;
+        if (nextY > _gridYSize) nextY = 0;
+        if (nextY< 0) nextY = _gridYSize;
+        if (nextX < 0) nextX = _gridXSize;
+        return (nextX, nextY);
     }
 
     public string TurnLeft()
@@ -92,16 +99,10 @@ public class Rover
 
     private bool FacingObstacle()
     {
-        (var xIncrement, var yIncrement) = _directionsAsCoordinates[_directions[_facing]];
-        int xCoordinateTemp = _xCoordinate + xIncrement;
-        int yCoordinateTemp = _yCoordinate + yIncrement;
-        if (xCoordinateTemp > _gridXSize) xCoordinateTemp = 0;
-        if (yCoordinateTemp > _gridYSize) yCoordinateTemp = 0;
-        if (yCoordinateTemp< 0) yCoordinateTemp = _gridYSize;
-        if (xCoordinateTemp < 0) xCoordinateTemp = _gridXSize;
-        if (_obstacles.ContainsKey(xCoordinateTemp))
+        (int nextX, int nextY) = CalculateNextPoint();
+        if (_obstacles.ContainsKey(nextX))
         {
-            return _obstacles[xCoordinateTemp].Contains(yCoordinateTemp);
+            return _obstacles[nextX].Contains(nextY);
         }
         return false;
     }
