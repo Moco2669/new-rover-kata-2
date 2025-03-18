@@ -57,7 +57,7 @@ public class Rover
 
     private string WriteReport()
     {
-        return _xCoordinate + ":" + _yCoordinate + ":" + _directions[_facing];
+        return (FacingObstacle() ? "O:" : "") + _xCoordinate + ":" + _yCoordinate + ":" + _directions[_facing];
     }
 
     private void WrapAroundDirections()
@@ -67,12 +67,12 @@ public class Rover
 
     public string ExecuteInput(string commands)
     {
-        string lastCommand = "";
+        string lastCommand = WriteReport();
         foreach (char command in commands)
         {
             if (FacingObstacle())
             {
-                return "O:" + WriteReport();
+                return lastCommand;
             }
             switch (command)
             {
@@ -86,12 +86,7 @@ public class Rover
                     lastCommand = TurnRight();
                     break;
             }
-            if (FacingObstacle())
-            {
-                return "O:" + WriteReport();
-            }
         }
-
         return lastCommand;
     }
 
